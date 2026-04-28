@@ -2,6 +2,12 @@
 <html>
 <head>
   <title>Website Pertama Anwan</title>
+<style>
+input, textarea {
+  width: 250px;
+  padding: 8px;
+}
+</style>
   <style>
     body {
       background-color: #f0f8ff;
@@ -57,6 +63,17 @@ function ubahText() {
     alert("Terima kasih sudah memilih saya 😄");
   }
 </script>
+
+<script>
+function kirim() {
+  var nama = document.getElementById("nama").value;
+  var pesan = document.getElementById("pesan").value;
+
+  document.getElementById("hasil").innerHTML =
+    "Halo " + nama + ", pesan kamu: " + pesan;
+}
+</script>
+
 <h2>Tentang Saya</h2>
 <p>Saya memiliki minat di bidang IT Support dan Web Development. Saya senang belajar teknologi baru dan siap berkembang.</p>
 
@@ -74,5 +91,16 @@ function ubahText() {
 <h2>Kontak</h2>
 <p>Email: anwanchailes@gmail.com</p>
 <p>WhatsApp: 0859-4577-5588</p>
+
+<h2>Project 2: Form Sederhana</h2>
+
+<input type="text" id="nama" placeholder="Masukkan nama"><br><br>
+
+<textarea id="pesan" placeholder="Masukkan pesan"></textarea><br><br>
+
+<button onclick="kirim()">Kirim</button>
+
+<p id="hasil"></p>
+
 </body>
 </html>
