@@ -50,6 +50,48 @@ function ubahText() {
 }
 </script>
 
+<script>
+function kirim() {
+  var nama = document.getElementById("nama").value;
+  var pesan = document.getElementById("pesan").value;
+
+  if (nama === "" || pesan === "") {
+    alert("Nama dan pesan harus diisi!");
+  } else {
+    document.getElementById("hasil").innerHTML =
+      "Halo " + nama + ", pesan kamu: " + pesan;
+  }
+}
+</script>
+
+
+<script>
+function login() {
+  var user = document.getElementById("username").value;
+  var pass = document.getElementById("password").value;
+
+  if (user === "" || pass === "") {
+    alert("Username dan password harus diisi!");
+  } 
+  else if (user === "admin" && pass === "12345") {
+    document.getElementById("loginHasil").innerHTML =
+      "Login berhasil! 🎉";
+
+    document.getElementById("loginHasil").style.color = "green";
+  
+window.location.href = "welcome.html";
+
+} 
+  else {
+    document.getElementById("loginHasil").innerHTML =
+      "Username atau password salah ❌";
+
+    document.getElementById("loginHasil").style.color = "red";
+  }
+}
+</script>
+
+
 <button onclick="klikSaya()">Klik Saya</button>
 <button onclick="pilihSaya()">Pilih Saya</button>
 <button onclick="ubahText()">Ubah Text</button>
@@ -102,18 +144,16 @@ function kirim() {
 
 <p id="hasil"></p>
 
-<script>
-function kirim() {
-  var nama = document.getElementById("nama").value;
-  var pesan = document.getElementById("pesan").value;
+<h2>Project 3: Login Sederhana</h2>
 
-  if (nama === "" || pesan === "") {
-    alert("Nama dan pesan harus diisi!");
-  } else {
-    document.getElementById("hasil").innerHTML =
-      "Halo " + nama + ", pesan kamu: " + pesan;
-  }
-}
-</script>
+<input type="text" id="username" placeholder="Username"><br><br>
+
+<input type="password" id="password" placeholder="Password"><br><br>
+
+<button onclick="login()">Login</button>
+
+<p id="loginHasil"></p>
+
+
 </body>
 </html>
