@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Portfolio Anwan</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #eef2f7;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: auto;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      color: blue;
+    }
+
+    section {
+      margin-bottom: 40px;
+    }
+
+    button {
+      padding: 8px 15px;
+      margin: 5px;
+      border: none;
+      border-radius: 8px;
+      background: red;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: darkred;
+    }
+
+    input, textarea {
+      width: 70%;
+      padding: 8px;
+      margin: 5px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    ul {
+      padding: 0;
+    }
+
+    li {
+      list-style: none;
+      margin: 10px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: white;
+      padding: 10px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .task-text {
+      flex: 1;
+      text-align: left;
+      margin-left: 10px;
+    }
+
+    .hapus-btn {
+      background: red;
+    }
+
+    .hapus-btn:hover {
+      background: darkred;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <h1>Halo, saya Anwan 👋</h1>
+  <p>Saya calon Web Developer 🚀</p>
+
+  <button onclick="klikSaya()">Klik Saya</button>
+  <button onclick="pilihSaya()">Pilih Saya</button>
+  <button onclick="ubahText()">Ubah Text</button>
+
+  <section>
+    <h2>Tentang Saya</h2>
+    <p>Saya memiliki minat di bidang IT Support dan Web Development.</p>
+  </section>
+
+  <section>
+    <h2>Skill</h2>
+    <ul>
+      <li>HTML</li>
+      <li>CSS</li>
+      <li>JavaScript</li>
+      <li>IT Support</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Kontak</h2>
+    <p>Email: anwanchailes@gmail.com</p>
+  </section>
+
+  <!-- PROJECT 2 -->
+  <section>
+    <h2>Project 2: Form</h2>
+
+    <input type="text" id="nama" placeholder="Masukkan nama"><br>
+    <textarea id="pesan" placeholder="Masukkan pesan"></textarea><br>
+
+    <button onclick="kirim()">Kirim</button>
+
+    <p id="hasil"></p>
+  </section>
+
+  <!-- PROJECT 3 -->
+  <section>
+    <h2>Project 3: Login</h2>
+
+    <input type="text" id="username" placeholder="Username"><br>
+    <input type="password" id="password" placeholder="Password"><br>
+
+    <button onclick="login()">Login</button>
+
+    <p id="loginHasil"></p>
+  </section>
+
+  <!-- PROJECT 4 -->
+  <section>
+    <h2>Project 4: To-Do List</h2>
+
+    <input type="text" id="taskInput" placeholder="Masukkan tugas">
+    <button onclick="tambahTask()">Tambah</button>
+
+    <ul id="taskList"></ul>
+  </section>
+
+</div>
+
+<script>
+function klikSaya() {
+  alert("Terima kasih!");
+}
+
+function pilihSaya() {
+  alert("Anda memilih saya 😄");
+}
+
+function ubahText() {
+  document.querySelector("p").innerHTML = "Saya siap kerja 🔥";
+}
+
+// FORM
+function kirim() {
+  var nama = document.getElementById("nama").value;
+  var pesan = document.getElementById("pesan").value;
+
+  if (nama === "" || pesan === "") {
+    alert("Harus diisi!");
+  } else {
+    document.getElementById("hasil").innerHTML =
+      "Halo " + nama + ", pesan kamu: " + pesan;
+  }
+}
+
+// LOGIN
+function login() {
+  var user = document.getElementById("username").value;
+  var pass = document.getElementById("password").value;
+
+  if (user === "admin" && pass === "123") {
+    document.getElementById("loginHasil").innerHTML = "Login berhasil 🎉";
+    document.getElementById("loginHasil").style.color = "green";
+  } else {
+    document.getElementById("loginHasil").innerHTML = "Login gagal ❌";
+    document.getElementById("loginHasil").style.color = "red";
+  }
+}
+
+// TODO LIST
+var tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
+function simpanTask() {
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+}
+
+function tampilkanTask() {
+  var list = document.getElementById("taskList");
+  list.innerHTML = "";
+
+  tasks.forEach(function(task, index) {
+    var li = document.createElement("li");
+
+    li.innerHTML = `
+      <input type="checkbox" onchange="toggleSelesai(this)">
+      <span class="task-text">${task}</span>
+      <button class="hapus-btn" onclick="hapusTask(${index})">Hapus</button>
+    `;
+
+    list.appendChild(li);
+  });
+}
+
+function tambahTask() {
+  var input = document.getElementById("taskInput");
+
+  if (input.value === "") {
+    alert("Isi dulu!");
+    return;
+  }
+
+  tasks.push(input.value);
+  input.value = "";
+
+  simpanTask();
+  tampilkanTask();
+}
+
+function hapusTask(index) {
+  tasks.splice(index, 1);
+  simpanTask();
+  tampilkanTask();
+}
+
+function toggleSelesai(checkbox) {
+  var text = checkbox.nextElementSibling;
+
+  if (checkbox.checked) {
+    text.style.textDecoration = "line-through";
+    text.style.color = "gray";
+  } else {
+    text.style.textDecoration = "none";
+    text.style.color = "black";
+  }
+}
+
+tampilkanTask();
+</script>
+
+</body>
+</html>
