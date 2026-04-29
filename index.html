@@ -246,6 +246,26 @@ function toggleSelesai(checkbox) {
 
 tampilkanTask();
 </script>
+  
+<script>
+function login() {
+  var user = document.getElementById("username").value;
+  var pass = document.getElementById("password").value;
 
+  if(user === "admin" && pass === "123") {
+    document.getElementById("loginHasil").innerHTML = "Login berhasil!";
+    document.getElementById("loginHasil").style.color = "green";
+
+    // 👉 redirect ke halaman lain
+    setTimeout(function(){
+      window.location.href = "welcome.html";
+    }, 1000); // delay 1 detik biar sempat lihat pesan
+  } else {
+    document.getElementById("loginHasil").innerHTML = "Login gagal!";
+    document.getElementById("loginHasil").style.color = "red";
+  }
+}
+</script>
+  
 </body>
 </html>
